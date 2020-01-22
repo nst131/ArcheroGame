@@ -1,0 +1,9 @@
+Bow male warrior animation list. (Motion Mixer animation sequences)
+
+
+1) Bow_R_combat_mode: 0 – 50 fr.,
+2) Bow_R_ready_arrow_fromBack: 51 – 101 fr.,
+3) Bow_R_ready_arrow_fromSide: 102 – 147 fr.,
+4) Bow_R_charging: 148 – 183 fr.,
+5) Bow_R_aim: 184 – 284 fr.,
+6) Bow_R_shoting: 285 – 320 fr.,
