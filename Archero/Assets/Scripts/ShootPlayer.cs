@@ -51,7 +51,7 @@ public class ShootPlayer : MonoBehaviour
         
          for (int i = 0; i < Enemies.Length; i++)
          {
-             if (Vector3.Distance(Gamer.transform.position,Enemies[i].transform.position)<=MinInterval || MinInterval==0)
+             if (Vector3.Distance(Gamer.transform.position,Enemies[i].transform.position)<=MinInterval)
              {
                  MinInterval = Vector3.Distance(Gamer.transform.position, Enemies[i].transform.position);
                  IndexEnemy = i;

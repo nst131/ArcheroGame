@@ -12,7 +12,7 @@ public class EnemyGiantAttack : MonoBehaviour
     private bool _Reloading = false;
 
     public float _Wate = 1.2f;
-    public static float Shoot = 1500f;
+    public static float Shoot = 2000f;
 
     void Start()
     {
@@ -67,9 +67,9 @@ public class EnemyGiantAttack : MonoBehaviour
         rock3.transform.Rotate(30, 0, 0);
         Destroy(rock3.gameObject, 3);
 
-       // rock1.AddComponent<Rigidbody>().AddForce(rock1.transform.forward * Shoot);  //Кидаем с помощью RigidBody
-       // rock2.AddComponent<Rigidbody>().AddForce(rock2.transform.forward * Shoot);
-       // rock3.AddComponent<Rigidbody>().AddForce(rock3.transform.forward * Shoot);
+        rock1.AddComponent<Rigidbody>().AddForce(rock1.transform.forward * Shoot);  //Кидаем с помощью RigidBody
+        rock2.AddComponent<Rigidbody>().AddForce(rock2.transform.forward * Shoot);
+        rock3.AddComponent<Rigidbody>().AddForce(rock3.transform.forward * Shoot);
 
         _Reloading = false;
         _animator.SetBool("Damage", false);

@@ -60,6 +60,7 @@ public class EnemyGiantMove : MonoBehaviour
         if (gameObject.GetComponent<HealthHelper>().Dead || !_Target || (_Target && _Target.GetComponent<HealthHelper>().Dead)
             || _Target.transform.position == Vector3.zero)
             return;
+
         if (_navMeshAgent.isStopped)
             _navMeshAgent.isStopped = false;
         _anim.SetBool("Move", true);
@@ -69,8 +70,9 @@ public class EnemyGiantMove : MonoBehaviour
     }
     void MoveWithTime()
     {
-        if (Time.time < Timing + 1)
+        if (Time.time < Timing + 1 || GetComponent<HealthHelper>().Dead)
             return;
+
         _navMeshAgent.isStopped = true;
         _anim.SetBool("Move", false);
         Moving = false;
