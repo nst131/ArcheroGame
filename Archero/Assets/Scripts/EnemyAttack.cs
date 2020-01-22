@@ -42,7 +42,7 @@ public class EnemyAttack : MonoBehaviour
         Vector3 PointAttack = transform.position + transform.forward * Range;
         Debug.DrawLine(transform.position, PointAttack, Color.red, 3);
         if (_anim)
-        { _anim.SetTrigger("Attack"); _anim.SetBool("Moving", false); }
+        { _anim.SetTrigger("Attack"); _anim.SetBool("Move", false); }
         StartCoroutine(AttackCaroutine(PointAttack));
         LastAttack = Time.time;
     }

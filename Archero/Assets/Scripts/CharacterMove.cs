@@ -7,7 +7,6 @@ public class CharacterMove : MonoBehaviour
 {
     public float SpeedMove;
 
-    //private CharacterController _characterController;
     private Transform Point1;
     private Transform Point2;
     private NavMeshAgent _NavMeshAgent;
@@ -20,8 +19,6 @@ public class CharacterMove : MonoBehaviour
 
     void Start()
     {
-        //_characterController = GetComponent<CharacterController>();
-
         //Point1 = GameObject.Find("Ground").transform.GetChild(0).GetComponent<Transform>();
         //Point2= GameObject.Find("Ground").transform.GetChild(1).GetComponent<Transform>();
 

@@ -27,39 +27,41 @@ public class ShootPlayer : MonoBehaviour
     {
         _animator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         Gamer = GameObject.FindGameObjectWithTag("Player").gameObject;
+        CurrentPos = Gamer.transform.position;
     }
 
     void Update()
     {
         ChooseEnemy();
-
+        
         StayOrNo();
-
+        
         //Rotate(_animator.GetBool("Damage"));  //Метод для разворота Персонажа Под Анимацию !!!
-       
+        
         FightOrNo();
-
+        
         //Debug.DrawRay(transform.position,transform.forward*1000, Color.red);  //Линия просмотра Атаки !!!
     }
 
     void ChooseEnemy()
     {
-        float MinInterval = 0;
-        int IndexEnemy = 0;
-        Enemies = GameObject.FindObjectsOfType<HealthHelper>().Where<HealthHelper>(p => !p.Dead && p.gameObject.tag=="Enemy").ToArray();
-
-        for (int i = 0; i < Enemies.Length; i++)
-        {
-            if (Vector3.Distance(Gamer.transform.position,Enemies[i].transform.position)<=MinInterval)
-            {
-                MinInterval = Vector3.Distance(Gamer.transform.position, Enemies[i].transform.position);
-                IndexEnemy = i;
-            }
-        }
-        if(Enemies.Length>0)
-        {
-            _Enemy = Enemies[IndexEnemy].gameObject;
-        }
+         float MinInterval = 0;
+         int IndexEnemy = 0;
+         Enemies = GameObject.FindObjectsOfType<HealthHelper>().Where<HealthHelper>(p => !p.Dead && p.gameObject.tag=="Enemy").ToArray();
+        
+         for (int i = 0; i < Enemies.Length; i++)
+         {
+             if (Vector3.Distance(Gamer.transform.position,Enemies[i].transform.position)<=MinInterval || MinInterval==0)
+             {
+                 MinInterval = Vector3.Distance(Gamer.transform.position, Enemies[i].transform.position);
+                 IndexEnemy = i;
+             }
+         }
+         if(Enemies.Length>0)
+         {
+             _Enemy = Enemies[IndexEnemy].gameObject;
+         }
+   
     }
 
     void StayOrNo()

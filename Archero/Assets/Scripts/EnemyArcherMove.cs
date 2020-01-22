@@ -77,7 +77,7 @@ public class EnemyArcherMove : MonoBehaviour
     }
     void MoveWithTime()
     {
-        if (Time.time < Timing + 1)
+        if (Time.time < Timing + 1 || gameObject.GetComponent<HealthHelper>().Dead)
             return;
         _navMeshAgent.isStopped = true;
         _anim.SetBool("Move", false);

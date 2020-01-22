@@ -74,7 +74,7 @@ public class EnemyMove : MonoBehaviour
         if (Vector3.Distance(transform.position, _Target.transform.position) > _Bot.stoppingDistance)
             Moving = true;
 
-        if (_anim.GetBool("Moving") != Moving)
-            _anim.SetBool("Moving", Moving);
+        if (_anim.GetBool("Move") != Moving)
+            _anim.SetBool("Move", Moving);
     }
 }

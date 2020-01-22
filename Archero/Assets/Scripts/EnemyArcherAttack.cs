@@ -26,7 +26,7 @@ public class EnemyArcherAttack : MonoBehaviour
     }
    public void Damage()
     {
-        if (!_Player || _Player.GetComponent<HealthHelper>().Dead)
+        if (!_Player || _Player.GetComponent<HealthHelper>().Dead  || _Enemy.GetComponent<HealthHelper>().Dead)
             return;
 
         _animator.SetBool("Damage", true);
@@ -53,7 +53,7 @@ public class EnemyArcherAttack : MonoBehaviour
     }
    public void RotatetoTarget()
     {
-        if (_Reloading || _Enemy.GetComponent<EnemyArcherMove>().Moving)
+        if (_Reloading || _Enemy.GetComponent<EnemyArcherMove>().Moving || _Enemy.GetComponent<HealthHelper>().Dead)
             return;
 
         Vector3 direction = _Player.transform.position - _Enemy.transform.position;
