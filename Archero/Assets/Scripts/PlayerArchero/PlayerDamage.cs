@@ -2,13 +2,23 @@
 
 public class PlayerDamage : MonoBehaviour
 {
-    [SerializeField] private float DamageArrow = 30;
+    private GameManager _eachData;
+    private float damageAttack;
 
-    void OnTriggerStay (Collider other)
+    private void Start()
     {
-        if(other.tag=="Enemy")
+        _eachData = FindObjectOfType<GameManager>();
+        damageAttack = _eachData.GetComponent<PlayerData>().Damage;
+    }
+
+    private void OnTriggerStay (Collider other)
+    {
+        if (other.GetComponent<HealthHelper>() && other.GetComponent<HealthHelper>().Dead)
+            return;
+
+        if(other.tag=="Enemy" && other.name != "RoundDamage")
         {
-            other.GetComponent<HealthHelper>().TakeAwayHP(DamageArrow);
+            other.GetComponent<HealthHelper>().TakeAwayHP(damageAttack);
             Destroy(gameObject);
         }
     }

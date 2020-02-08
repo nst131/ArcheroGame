@@ -32,13 +32,13 @@ public class PlayerAttack : MonoBehaviour
 
     private void ChooseEnemy()
     {
-         float MinInterval = 0;
+         float MinInterval = 100;
          int IndexEnemy = 0;
          HealthHelper[] _enemies = GameObject.FindObjectsOfType<HealthHelper>().Where<HealthHelper>(p => !p.Dead && p.gameObject.tag=="Enemy").ToArray();
-        
+
          for (int i = 0; i < _enemies.Length; i++)
          {
-             if (Vector3.Distance(_player.transform.position,_enemies[i].transform.position)<=MinInterval)
+             if (Vector3.Distance(_player.transform.position,_enemies[i].transform.position) <= MinInterval)
              {
                  MinInterval = Vector3.Distance(_player.transform.position, _enemies[i].transform.position);
                  IndexEnemy = i;
@@ -76,7 +76,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void ReadyToShoot()
     {
-        if (stayPos && _enemy && !_enemy.GetComponent<HealthHelper>().Dead && !reloadingAttack)
+        if (stayPos && !reloadingAttack)
         {
             ShootAttack();
         }
@@ -88,7 +88,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void ShootAttack()
     {
-        if (!_player || _player.GetComponent<HealthHelper>().Dead || !_enemy)
+        if (!_player || _player.GetComponent<HealthHelper>().Dead || !_enemy || _enemy.GetComponent<HealthHelper>().Dead || reloadingAttack)
             return;
 
         _anim.SetBool("Damage",true);
@@ -109,26 +109,36 @@ public class PlayerAttack : MonoBehaviour
             yield return new WaitForSeconds(waitingAnimSecondAttack);
         }
 
+        if (!_player || _player.GetComponent<HealthHelper>().Dead || !_enemy || _enemy.GetComponent<HealthHelper>().Dead)
+            yield break;
+
         RaycastHit hit;
         Ray ray = new Ray(_player.transform.GetChild(2).position, _player.transform.GetChild(2).forward);
 
         if (Physics.Raycast(ray, out hit, 1000))
         {
-           if (hit.collider.tag == "Enemy")
-           {
+            if(hit.collider.tag == "Enemy")
+            {
                 GameObject arrow = Instantiate<GameObject>(Resources.Load<GameObject>("PlayerShell"), _player.transform.GetChild(2).position,
-                    Quaternion.identity);
+                       Quaternion.identity);
                 arrow.transform.LookAt(Enemy.transform);
                 arrow.GetComponent<Rigidbody>().AddForce(arrow.transform.forward * forceShoot);
                 Destroy(arrow.gameObject, 3);
                 firstAttack = true;
                 reloadingAttack = false;
-           }
+            }
+            else
+            {
+                _anim.SetBool("Damage", false);
+            }
         }
     }
 
     void RotateToTarget(GameObject Enemy)
     {
+        if (!_player || _player.GetComponent<HealthHelper>().Dead)
+            return;
+
         Vector3 direction = Enemy.transform.position - _player.transform.position;
         Quaternion lookrotation = Quaternion.LookRotation(direction);
         _player.transform.rotation = Quaternion.Lerp(_player.transform.rotation, lookrotation, Time.deltaTime*5);
