@@ -5,6 +5,7 @@ public class BlackoutScreen : MonoBehaviour
 {
     private GameObject _panel;
     private GameObject _sliderLevel;
+    private GameObject _textCoin;
     [SerializeField] private float stepColorPositive = 0.5f;
     [SerializeField] private float stepColorNegative = 0.5f;
     [SerializeField] private bool getDarkScreen;
@@ -15,6 +16,7 @@ public class BlackoutScreen : MonoBehaviour
     {
         _panel = gameObject;
         _sliderLevel = GameObject.FindGameObjectWithTag("SliderLevel");
+        _textCoin = GameObject.FindGameObjectWithTag("TextCoin");
     }
 
     private void Update()
@@ -29,6 +31,7 @@ public class BlackoutScreen : MonoBehaviour
             if (colorA == 0)
             {
                 _sliderLevel.SetActive(false);
+                _textCoin.SetActive(false);
                 Image alphaImage = _panel.GetComponent<Image>();
                 alphaImage.color = new Color(alphaImage.color.r, alphaImage.color.g, alphaImage.color.b, alphaImage.color.a + stepColorPositive * Time.deltaTime);
                 if (alphaImage.color.a >= 1)
@@ -46,6 +49,7 @@ public class BlackoutScreen : MonoBehaviour
                     colorA = 0;
                     getDarkScreen = false;
                     _sliderLevel.SetActive(true);
+                    _textCoin.SetActive(true);
                 }
             }
         }

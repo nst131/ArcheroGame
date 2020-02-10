@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private float speedMove = 8;
+    public float SpeedMove { get { return speedMove; } set { speedMove = value; } }
 
     private GameObject _player;
     private Animator _anim;

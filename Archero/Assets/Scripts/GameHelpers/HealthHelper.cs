@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class HealthHelper : MonoBehaviour
 {
@@ -23,6 +24,11 @@ public class HealthHelper : MonoBehaviour
         _appearHealth = GetComponent<AppearHealth>();
         InitializationHp();
         InitializationSlider();
+    }
+
+    public void SliderInstallActive(bool active)
+    {
+        _uIHealthHelper.GetComponent<Slider>().gameObject.SetActive(active);
     }
 
     private void InitializationSlider()

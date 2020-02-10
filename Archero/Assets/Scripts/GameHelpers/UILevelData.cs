@@ -6,6 +6,7 @@ public delegate void GetExperience();
 
 public class UILevelData : MonoBehaviour
 {
+    private GameObject _gameManager;
     private Slider _sliderLevel;
     private Text _textLevel;
     private Text _textGold;
@@ -20,6 +21,7 @@ public class UILevelData : MonoBehaviour
 
     private void Start()
     {
+        _gameManager = GameObject.FindObjectOfType<GameManager>().gameObject;
         levels = Enum.GetValues(typeof(UILevel)) as UILevel[];
 
         _sliderLevel = GameObject.FindGameObjectWithTag("SliderLevel").GetComponent<Slider>();
@@ -28,7 +30,7 @@ public class UILevelData : MonoBehaviour
 
         _textLevel = _sliderLevel.transform.GetChild(3).GetComponent<Text>();
         _textLevel.text = "LEVEL" + " " + currentLevelText;
-        _textGold = _sliderLevel.transform.GetChild(4).GetComponent<Text>();
+        _textGold = GameObject.FindGameObjectWithTag("TextCoin").GetComponent<Text>();
         _textGold.text = currentCoinGold.ToString();
 
         getExperience += GetCoins;
@@ -49,6 +51,8 @@ public class UILevelData : MonoBehaviour
             _sliderLevel.value = (int)UILevel.Zero;
             _sliderLevel.maxValue = (int)levels[++currentLevelText];
             _textLevel.text = "LEVEL" + " " + currentLevelText;
+
+            _gameManager.GetComponent<MenuCharacteristic>().StartMenuCharacteristic();
         }
     }
 
