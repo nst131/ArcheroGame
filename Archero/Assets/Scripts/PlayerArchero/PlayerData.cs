@@ -25,7 +25,6 @@ public class PlayerData : MonoBehaviour
         maxHp += Hp;
         _healtPlayer.MaxHp += Hp;
         _healtPlayer.Hp += Hp;
-        Debug.Log("MaxHp" + " " +_healtPlayer.MaxHp);
     }
 
     private void Speed(float Rate ,float MinusFisrtTime ,float MinusSecondTime)
@@ -33,13 +32,11 @@ public class PlayerData : MonoBehaviour
         _animPlayer.SetFloat("Speed", _animPlayer.GetFloat("Speed") + Rate);
         _attackPlayer.waitingAnimFirstAttack -= MinusFisrtTime;
         _attackPlayer.waitingAnimSecondAttack -= MinusSecondTime;
-        Debug.Log("Speed" + " " +_animPlayer.GetFloat("Speed"));
     }
 
     private void Attack(float Damage)
     {
         damage += Damage;
-        Debug.Log("Damage"+ " " + damage);
     }
 
     public void SumSkill(string NameMethod)

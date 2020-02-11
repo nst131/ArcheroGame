@@ -31,7 +31,7 @@ public class TransitionToStartPosition : MonoBehaviour
 
     private IEnumerator WateRevivalBots()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
 
         if(_gameManager.LevelPassage % 2 == 0)
         {
