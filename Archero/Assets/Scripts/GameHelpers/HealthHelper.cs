@@ -11,9 +11,9 @@ public class HealthHelper : MonoBehaviour
     private AppearHealth _appearHealth;
 
     private float maxHp;
-    public float MaxHp { get { return maxHp; } }
+    public float MaxHp { get { return maxHp; } set { maxHp = value; } }
     private float hp;
-    public float Hp {get { if(hp>maxHp)hp=maxHp; return hp; } set { hp = value; } }
+    public float Hp {get { if(hp > maxHp) hp=maxHp; return hp; } set { hp = value; } }
     private bool dead;
     public bool Dead { get { return dead; } set { dead = value; }}
     

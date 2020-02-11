@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f9001b4ff0db340af919bd8a231dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 200
+  maxHp: 400
   firstDamage: 20
   secondDamage: 20
   roundDamage: 0.5
@@ -1141,7 +1141,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.25e-43, y: -4.7623634, z: 6.25e-43, w: -4.899193}
+  m_BoundingSphereOverride: {x: 4.89e-43, y: 0.0000000017067014, z: 4.89e-43, w: 0.0000000017296209}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2621,6 +2621,16 @@ PrefabInstance:
     - target: {fileID: 7329578544986182483, guid: cff66d87c8ef0f24997f667e95d4bbd1,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329578544986182483, guid: cff66d87c8ef0f24997f667e95d4bbd1,
+        type: 3}
+      propertyPath: waitingAnimSecondAttack
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329578544986182483, guid: cff66d87c8ef0f24997f667e95d4bbd1,
+        type: 3}
+      propertyPath: waitingAnimFirstAttack
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8319953366131386785, guid: cff66d87c8ef0f24997f667e95d4bbd1,

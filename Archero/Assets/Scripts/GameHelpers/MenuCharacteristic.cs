@@ -16,6 +16,7 @@ public class MenuCharacteristic : MonoBehaviour
 
     private bool stopSpeed = false;
     private bool insert = false;
+    private bool add = false;
     private float playerSpeedMove;
 
     private float scrollMaxSpeed = -1.5f;
@@ -56,8 +57,8 @@ public class MenuCharacteristic : MonoBehaviour
     }
 
     private void DeleteCharacteristics()
-    {
-        foreach (var skill in _panelLineSkill.GetComponentsInChildren<GameObject>())
+    {     
+        foreach (var skill in _panelLineSkill.GetComponentsInChildren<PlayerSkill>())
         {
             Destroy(skill.gameObject);
         }
@@ -83,7 +84,7 @@ public class MenuCharacteristic : MonoBehaviour
 
     private void Determinate()
     {
-        if (!insert) return;
+        if (!insert || add) return;
 
         Ray ray = new Ray(_posPanelLineSkill, Vector3.down);
         RaycastHit hit;
@@ -98,6 +99,8 @@ public class MenuCharacteristic : MonoBehaviour
                 if(_textFinalSkill.text.Contains("Clone"))
                 {
                     _textFinalSkill.text = _textFinalSkill.text.Remove(_textFinalSkill.text.IndexOf('.'));
+                    hit.collider.gameObject.GetComponent<PlayerSkill>().PlusSkill(_textFinalSkill.text);
+                    add = true;
                 }
                 scrollMinSpeed = 0.0f;
           }
@@ -113,8 +116,9 @@ public class MenuCharacteristic : MonoBehaviour
         _player.GetComponent<HealthHelper>().SliderInstallActive(true);
         _player.GetComponent<PlayerMove>().SpeedMove = playerSpeedMove;
         _panelFinalCharacteristic.SetActive(false);
-        //DeleteCharacteristics();
+        DeleteCharacteristics();
         insert = false;
+        add = false;
         _menuCharacteristic.SetActive(false);
     }
 

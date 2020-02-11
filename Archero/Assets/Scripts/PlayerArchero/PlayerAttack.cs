@@ -13,9 +13,9 @@ public class PlayerAttack : MonoBehaviour
     private bool reloadingAttack;
     private bool firstAttack;
 
-    [SerializeField] private float waitingAnimFirstAttack = 1.0f;
-    [SerializeField] private float waitingAnimSecondAttack = 1.3f;
     [SerializeField] private float forceShoot = 1500;
+    [HideInInspector] public float waitingAnimFirstAttack = 1.0f;
+    [HideInInspector] public float waitingAnimSecondAttack = 1.3f;
 
     private void Start()
     {

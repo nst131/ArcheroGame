@@ -33,7 +33,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shoot
-  m_Speed: 2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2433521623260714238}
@@ -44,14 +44,14 @@ AnimatorState:
   m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -3704289112126983070, guid: 16995592e6c696b40ba6c82a48f9ab17,
     type: 3}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: Speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -280,7 +280,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Start
-  m_Speed: 2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2550348533679680080}
@@ -291,14 +291,14 @@ AnimatorState:
   m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -7251055699838741195, guid: 16995592e6c696b40ba6c82a48f9ab17,
     type: 3}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: Speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -341,19 +341,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Damage
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Dead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: Speed
+    m_Type: 1
+    m_DefaultFloat: 2
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -469,7 +475,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Reloading
-  m_Speed: 2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5546154428022717689}
@@ -480,14 +486,14 @@ AnimatorState:
   m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -4759078611176051166, guid: 16995592e6c696b40ba6c82a48f9ab17,
     type: 3}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: Speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
