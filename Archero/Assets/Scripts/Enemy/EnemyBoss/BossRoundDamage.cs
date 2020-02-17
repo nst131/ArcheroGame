@@ -3,19 +3,17 @@ using System.Collections;
 
 public class BossRoundDamage : MonoBehaviour
 {
-    private ParticleSystem _roundDamage;
-    private SphereCollider _sphereColliderAttack;
-    private GameManager _eachData;
-    private float roundDamageAttack;
+    [SerializeField] private ParticleSystem _roundDamage;
+    [SerializeField] private SphereCollider _sphereColliderAttack;
+    private LevelUp _levelUp;
+    private float _roundDamageAttack;
 
     private void Start()
     {
-        _roundDamage = GetComponent<ParticleSystem>();
         _roundDamage.Stop();
-        _sphereColliderAttack = GetComponent<SphereCollider>();
         _sphereColliderAttack.enabled = false;
-        _eachData = GameObject.FindObjectOfType<GameManager>();
-        roundDamageAttack = _eachData.GetComponent<EnemyBossData>().RoundDamage;
+        _levelUp = GameObject.FindObjectOfType<LevelUp>();
+        _roundDamageAttack = _levelUp.GetComponent<BossData>().RoundDamage;
     }
 
     public void StartRoundDamage()
@@ -37,7 +35,7 @@ public class BossRoundDamage : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<HealthHelper>().TakeAwayHP(roundDamageAttack);
+            other.GetComponent<HealthHelper>().TakeAwayHP(_roundDamageAttack);
         }
     }
 }

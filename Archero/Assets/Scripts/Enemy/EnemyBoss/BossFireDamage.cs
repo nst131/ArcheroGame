@@ -3,16 +3,15 @@ using System.Collections;
 
 public class BossFireDamage : MonoBehaviour
 {
-    private ParticleSystem _firstFireDamage;
-    private GameManager _eachData;
-    private float fireDamageAttack;
+    [SerializeField] private ParticleSystem _firstFireDamage;
+    private LevelUp _levelUp;
+    private float _fireDamageAttack;
 
     private void Start()
     {
-        _firstFireDamage = GetComponent<ParticleSystem>();
         StartCoroutine(StopFireDamage());
-        _eachData = GameObject.FindObjectOfType<GameManager>();
-        fireDamageAttack = _eachData.GetComponent<EnemyBossData>().FireDamage;
+        _levelUp = GameObject.FindObjectOfType<LevelUp>();
+        _fireDamageAttack = _levelUp.GetComponent<BossData>().FireDamage;
     }
 
     private IEnumerator StopFireDamage()
@@ -26,7 +25,7 @@ public class BossFireDamage : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            other.GetComponent<HealthHelper>().TakeAwayHP(fireDamageAttack);
+            other.GetComponent<HealthHelper>().TakeAwayHP(_fireDamageAttack);
         }
     }
 }

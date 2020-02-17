@@ -3,22 +3,25 @@ using System.Collections;
 
 public class BossAttack : MonoBehaviour
 {
-    private GameObject _boss;
-    private Animator _bossAnimator;
     private GameObject _player;
+    private HealthHelper _playerHealth;
+    private GameObject _boss;
+    [SerializeField] private Animator _bossAnimator;
+    [SerializeField] private HealthHelper _bossHealth;
 
-    [SerializeField] private float scatter = 2.0f;
-    [SerializeField] private float forceFirstShoot = 1500f;
-    [SerializeField] private float forceSecondShoot = 500f;
+    [Header("DescriptionAttack")]
+    [SerializeField] private float _scatter = 20.0f;
+    [SerializeField] private float _forceFirstShoot = 1500f;
+    [SerializeField] private float _forceSecondShoot = 500f;
 
-    private bool reloadingAttack;
-    public bool ReloadingAttack { get { return reloadingAttack; } set { reloadingAttack = value; } }
+    private bool _reloadingAttack;
+    public bool ReloadingAttack { get { return _reloadingAttack; } set { _reloadingAttack = value; } }
 
     private void Start()
     {
         _boss = gameObject;
-        _bossAnimator = GetComponent<Animator>();
         _player = GameObject.FindGameObjectWithTag("Player");
+        _playerHealth = _player.GetComponent<HealthHelper>();
     }
 
     public void Attack()
@@ -41,31 +44,31 @@ public class BossAttack : MonoBehaviour
 
     private void FirstAttack()
     {
-        if (!_boss || _boss.GetComponent<HealthHelper>().Dead || !_player || _player.GetComponent<HealthHelper>().Dead)
+        if (!_boss || _bossHealth.Dead || !_player || _playerHealth.Dead)
             return;
 
         Vector3 directionAttack = new Vector3(_player.transform.position.x, _player.GetComponent<CapsuleCollider>().height, _player.transform.position.z);
 
-        GameObject firstShell = Instantiate<GameObject>(Resources.Load<GameObject>("BossFirstShell"), _boss.transform.GetChild(6).position,
+        GameObject firstShell = Instantiate<GameObject>(Resources.Load<GameObject>("BossShell/FirstShell"), _boss.transform.GetChild(6).position,
             Quaternion.identity);
         firstShell.transform.LookAt(directionAttack);
-        firstShell.GetComponent<Rigidbody>().AddForce(firstShell.transform.forward * forceFirstShoot);
+        firstShell.GetComponent<Rigidbody>().AddForce(firstShell.transform.forward * _forceFirstShoot);
         Destroy(firstShell, 3f);
     }
 
     private void SecondAttack()
     {
-        if (!_boss || _boss.GetComponent<HealthHelper>().Dead || !_player || _player.GetComponent<HealthHelper>().Dead)
+        if (!_boss || _bossHealth.Dead || !_player || _playerHealth.Dead)
             return;
 
         Vector3 directionAttack = new Vector3(_player.transform.position.x, _player.GetComponent<CapsuleCollider>().height, _player.transform.position.z);
 
         for (int i = 0; i < 20; i++)
         {
-            GameObject secondShell = Instantiate<GameObject>(Resources.Load<GameObject>("BossSecondShell"), _boss.transform.GetChild(5).position,
+            GameObject secondShell = Instantiate<GameObject>(Resources.Load<GameObject>("BossShell/SecondShell"), _boss.transform.GetChild(5).position,
                 Quaternion.identity);
-            secondShell.transform.LookAt(directionAttack + Random.insideUnitSphere * scatter);
-            secondShell.GetComponent<Rigidbody>().AddForce(secondShell.transform.forward * forceSecondShoot);
+            secondShell.transform.LookAt(directionAttack + Random.insideUnitSphere * _scatter);
+            secondShell.GetComponent<Rigidbody>().AddForce(secondShell.transform.forward * _forceSecondShoot);
             Destroy(secondShell, 3f);
         }
     }

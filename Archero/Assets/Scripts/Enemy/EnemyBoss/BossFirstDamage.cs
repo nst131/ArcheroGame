@@ -2,25 +2,24 @@
 
 public class BossFirstDamage : MonoBehaviour
 {
-    private ParticleSystem _particleFirstDamage;
+    [SerializeField] private ParticleSystem _particleFirstDamage;
     private GameObject _firstDamage;
-    private GameManager _eachData;
-    private float firstDamageAttack;
+    private LevelUp _levelUp;
+    private float _firstDamageAttack;
 
     private void Start()
     {
-        _firstDamage = gameObject;
-        _particleFirstDamage = GetComponentInChildren<ParticleSystem>();
         _particleFirstDamage.Play();
-        _eachData = GameObject.FindObjectOfType<GameManager>();
-        firstDamageAttack = _eachData.GetComponent<EnemyBossData>().FirstDamage;
+        _firstDamage = gameObject;
+        _levelUp = GameObject.FindObjectOfType<LevelUp>();
+        _firstDamageAttack = _levelUp.GetComponent<BossData>().FirstDamage;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Ground")
         {
-            Instantiate<GameObject>(Resources.Load<GameObject>("BossFireShell"),_firstDamage.transform.position,Quaternion.identity);
+            Instantiate<GameObject>(Resources.Load<GameObject>("BossShell/FireShell"),_firstDamage.transform.position,Quaternion.identity);
             Destroy(_firstDamage);
         }
     }
@@ -29,7 +28,7 @@ public class BossFirstDamage : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            other.GetComponent<HealthHelper>().TakeAwayHP(firstDamageAttack);
+            other.GetComponent<HealthHelper>().TakeAwayHP(_firstDamageAttack);
             Destroy(_firstDamage);
         }
     }
