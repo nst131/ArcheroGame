@@ -8,4 +8,5 @@ public abstract class Enemy : MonoBehaviour
     public abstract void ShootAttack();
     public abstract void LevelUp();
     public abstract void DropThings();
+    public abstract void Clash();
 }

@@ -3,7 +3,12 @@ guid: 55333d873627a414e9b78f2b913ff2c4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _golem: {instanceID: 0}
+  - _golemAnim: {instanceID: 0}
+  - _golemHealth: {instanceID: 0}
+  - _golemShell: {fileID: 1375754531036840, guid: 71497ec4178769a4c8cdb38563f01fc0,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

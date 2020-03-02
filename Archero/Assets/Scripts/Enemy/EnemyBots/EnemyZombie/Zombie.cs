@@ -9,8 +9,10 @@ public class Zombie : Enemy
     [SerializeField] private ZombieAttack _zombieAttack;
     [SerializeField] private HealthHelper _zombieHealth;
     [SerializeField] private Rigidbody _zombieRigBody;
+    [SerializeField] private Collision _zombieCollision;
     [SerializeField] private CapsuleCollider _zombieCapsuleCollider;
     [SerializeField] private Drop _zombieDrop;
+
     private BotsData _botsData;
 
     private float _timing;
@@ -35,7 +37,6 @@ public class Zombie : Enemy
     {
         IsGrounding();
         Move();
-        IgnorePlayer();
         Tactic();
     }
 
@@ -67,6 +68,11 @@ public class Zombie : Enemy
     public override void ShootAttack()
     {
         _zombieAttack.Attack();
+    }
+
+    public override void Clash()
+    {
+        _zombieAttack.OnCollisionEnter(_zombieCollision);
     }
 
     public override void LevelUp()
@@ -120,11 +126,6 @@ public class Zombie : Enemy
             _isGround = false;
             _reloadingAttack = false;
         }
-    }
-
-    private void IgnorePlayer()
-    {
-        Physics.IgnoreLayerCollision(8, 9);
     }
 
     public override void RotateToPlayer()

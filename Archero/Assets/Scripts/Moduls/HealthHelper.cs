@@ -10,16 +10,19 @@ public class HealthHelper : MonoBehaviour
     private PlayerData _playerData;
     private BotsData _botsData;
     private BossData _bossData;
+    [SerializeField] private GameObject _sliderInsert;
     [SerializeField] private BossAttack _boss;
     [SerializeField] private Drop _drop;
-    [SerializeField] private CapsuleCollider _targetCapsuleCollider;
+    [SerializeField] private CapsuleCollider _capsuleCollider;
 
-    private float maxHp;
-    public float MaxHp { get { return maxHp; } set { maxHp = value; } }
-    private float hp;
-    public float Hp {get { if(hp > maxHp) hp=maxHp; return hp; } set { hp = value; } }
-    private bool dead;
-    public bool Dead { get { return dead; } set { dead = value; }}
+    private float _textHp;
+    public float TextHp { get { if (_textHp > _maxHp) _textHp = _maxHp; return _textHp; } set { _textHp = value; } }
+    private float _maxHp;
+    public float MaxHp { get { return _maxHp; } set { _maxHp = value; } }
+    private float _hp;
+    public float Hp {get { if(_hp > _maxHp) _hp = _maxHp; return _hp; } set { _hp = value; } }
+    private bool _dead;
+    public bool Dead { get { return _dead; } set { _dead = value; }}
     
     private void Start()
     {
@@ -39,41 +42,46 @@ public class HealthHelper : MonoBehaviour
 
     private void InitializationSlider()
     {
-        _slider = Instantiate<GameObject>(Resources.Load<GameObject>("UI/Slider"));
+        _slider = Instantiate<GameObject>(_sliderInsert);
         _slider.transform.SetParent(GameObject.Find("Canvas").transform);
         _slider.tag = gameObject.tag;
         _uIHealthHelper = _slider.GetComponent<UIHealthHelper>();
         _uIHealthHelper.Target = this;
-        _uIHealthHelper.TargetCapsuleCollider = _targetCapsuleCollider;
+        _uIHealthHelper.TargetCapsuleCollider = _capsuleCollider;
     }
 
     private void InitializationHp()
     {
         if (gameObject.tag == "Player")
         {
-            maxHp = _playerData.MaxHp;
+            
+            _maxHp = _playerData.MaxHp;
+            _textHp = _playerData.MaxHp;
+            
         }
         else if(gameObject.tag == "Enemy")
         {
             if(_boss)
             {
-                maxHp = _bossData.MaxHp;
+                _maxHp = _bossData.MaxHp;
+                _textHp = _bossData.MaxHp;
             }
             else
             {
-                maxHp = _botsData.MaxHp;
+                _maxHp = _botsData.MaxHp;
+                _textHp = _botsData.MaxHp;
             }
         }
-        hp = maxHp;
+        _hp = _maxHp;
     }
 
-    public void TakeAwayHP(float Damage)
+    public void TakeAwayHP(float damage)
     {
-        float newHp = hp - Damage;
+        float newHp = _hp - damage;
 
         if(newHp<=0)
         {
-            hp = 0;
+            _hp = 0;
             Dead = true;
 
             if (GetComponent<NavMeshAgent>() && GetComponent<Collider>())
@@ -97,18 +105,22 @@ public class HealthHelper : MonoBehaviour
                 GetComponent<Animator>().SetBool("Dead", true);
             }
 
-            Destroy(_slider);
-            Destroy(gameObject, 3);
-
             if(gameObject.tag == "Enemy")
             {
+                Destroy(_slider);
+                Destroy(gameObject, 3);
                 _drop.InvokeEventScatterCoins();
                 _drop.InvokeEventScatterHealth();
+            }
+            else
+            {
+                _playerData.InvokeEventPlayerDead();
             }
         }
         else
         {
-            hp = newHp;
+            _hp = newHp;
+            _textHp = newHp;
         }
     }
 }

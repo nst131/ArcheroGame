@@ -8,10 +8,12 @@ public class GolemAttack : MonoBehaviour
     [SerializeField] private GameObject _golem;
     [SerializeField] private Animator _golemAnim;
     [SerializeField] private HealthHelper _golemHealth;
+    [SerializeField] private GameObject _golemShell;
 
     [Header ("DesctiptionAttack")]
     [SerializeField] private float _wateAnimation = 1.8f;
     [SerializeField] private float _forceShoot = 500f;
+    [SerializeField] private float _forceClash = 20f;
     [HideInInspector] public bool ReloadingAttack = false;
 
     private void Start()
@@ -41,7 +43,7 @@ public class GolemAttack : MonoBehaviour
         int g = 2;
         for (int i = 0; i < 3 ; i++)
         {
-            GameObject rock = Instantiate<GameObject>(Resources.Load<GameObject>("BotsShell/GolemShell"), transform.GetChild(g).position,
+            GameObject rock = Instantiate<GameObject>(_golemShell, transform.GetChild(g).position,
             Quaternion.LookRotation(transform.GetChild(g).position - transform.position));
             rock.transform.Rotate(30, 0, 0);
             Destroy(rock.gameObject, 3);
@@ -52,6 +54,14 @@ public class GolemAttack : MonoBehaviour
 
         ReloadingAttack = false;
         _golemAnim.SetBool("Damage", false);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<HealthHelper>().TakeAwayHP(_forceClash);
+        }
     }
 }
 

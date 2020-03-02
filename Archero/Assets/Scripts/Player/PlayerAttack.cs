@@ -5,8 +5,10 @@ using System.Linq;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
+    [SerializeField] private Player _playerHero;
     [SerializeField] private HealthHelper _playerHealth;
     [SerializeField] private Animator _playerAnim;
+    [SerializeField] private GameObject _playerShell;
     private GameObject _enemy;
     private HealthHelper _enemyHealth;
     private Vector3 _currentPos;
@@ -19,6 +21,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _forceShoot = 1500;
     [HideInInspector] public float _waitingAnimFirstAttack = 1.0f;
     [HideInInspector] public float _waitingAnimSecondAttack = 1.3f;
+    [HideInInspector] private int _amountArrow = 1;
+    public int AmountArrow { get { return _amountArrow; } set { _amountArrow = value; } }
 
     private void Update()
     {
@@ -118,11 +122,16 @@ public class PlayerAttack : MonoBehaviour
         {
             if(hit.collider.tag == "Enemy")
             {
-                GameObject arrow = Instantiate<GameObject>(Resources.Load<GameObject>("PlayerShell/PlayerShell"), _player.transform.GetChild(2).position,
-                       Quaternion.identity);
-                arrow.transform.LookAt(_enemy.transform);
-                arrow.GetComponent<Rigidbody>().AddForce(arrow.transform.forward * _forceShoot);
-                Destroy(arrow.gameObject, 3);
+                for (int i = 0; i < _amountArrow; i++)
+                {
+                    GameObject arrow = Instantiate<GameObject>(_playerShell, _player.transform.GetChild(i+2).position,
+                                          Quaternion.identity);
+                    arrow.transform.LookAt(_enemy.transform);
+                    _playerHero.InvokeEventShoot();
+                    arrow.GetComponent<Rigidbody>().AddForce(arrow.transform.forward * _forceShoot);
+                    Destroy(arrow.gameObject, 3);
+                }
+
                 _firstAttack = true;
                 _reloadingAttack = false;
             }

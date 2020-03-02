@@ -3,7 +3,13 @@ guid: 004024fe4020eb743a8307c945549801
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _sliderInsert: {fileID: 4257467130652263594, guid: 41d6dd9a794a0a74e8aa6cba7c9ebfc0,
+      type: 3}
+  - _boss: {fileID: -6386641498761183035, guid: ecf7aab8523b44e4a9de654d1b1d8619,
+      type: 3}
+  - _drop: {instanceID: 0}
+  - _capsuleCollider: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

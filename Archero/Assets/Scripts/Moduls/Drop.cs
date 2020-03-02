@@ -4,17 +4,14 @@ public class Drop : MonoBehaviour
 {
     private delegate void Scatter();
 
-    private GameObject _enemy;
-    private GameObject _coin;
-    private GameObject _bottleHealth;
+    [SerializeField] private GameObject _enemy;
+    [SerializeField] private GameObject _coin;
+    [SerializeField] private GameObject _health;
     private event Scatter _scatterHealth;
     private event Scatter _scatterCoins;
 
     private void Start()
     {
-        _enemy = gameObject;
-        _bottleHealth = Resources.Load<GameObject>("Health");
-        _coin = Resources.Load<GameObject>("Coin");
         _scatterHealth += ScatterHealth;
         _scatterCoins += ScatterCoins;
     }
@@ -22,7 +19,7 @@ public class Drop : MonoBehaviour
     private void InsertBottleHealth()
     {
         Vector3 enemyPosHeight = new Vector3(_enemy.transform.position.x, _enemy.transform.position.y + 2, _enemy.transform.position.z);
-        Instantiate<GameObject>(_bottleHealth, enemyPosHeight, Quaternion.identity);
+        Instantiate<GameObject>(_health, enemyPosHeight, Quaternion.identity);
     }
 
     private bool ChanceOfFalling()

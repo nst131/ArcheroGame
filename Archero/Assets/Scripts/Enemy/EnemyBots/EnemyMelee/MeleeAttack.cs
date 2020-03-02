@@ -15,6 +15,7 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private float _radiusAttack = 1.5f;
     [SerializeField] private float _speedAttack = 5;
     [SerializeField] private float _rangeAttack = 3;
+    [SerializeField] private float _forceClash = 20f;
     public float RangeAttack { get { return _rangeAttack; } }
 
     private float _damageAttack;
@@ -58,6 +59,14 @@ public class MeleeAttack : MonoBehaviour
             {
                 item.GetComponent<HealthHelper>().TakeAwayHP(_damageAttack);
             }
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<HealthHelper>().TakeAwayHP(_forceClash);
         }
     }
 }

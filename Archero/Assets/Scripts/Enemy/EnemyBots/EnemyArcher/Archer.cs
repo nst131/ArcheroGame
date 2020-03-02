@@ -12,6 +12,7 @@ public class Archer : Enemy
     [SerializeField] private LineRenderer _archerLineRenderer;
     [SerializeField] private ArcherAttack _archerAttack;
     [SerializeField] private HealthHelper _archerHealth;
+    [SerializeField] private Collider _archerCollider;
     [SerializeField] private Drop _archerDrop;
     private BotsData _botsData;
 
@@ -52,7 +53,6 @@ public class Archer : Enemy
         {
             if(hit.collider.tag == "Player")
             {
-                Debug.Log("dasdasjadfhjfdas");
                 _archerLineRenderer.SetPosition(0, transform.position);
                 _archerLineRenderer.SetPosition(1, _player.transform.position);
             }
@@ -83,6 +83,10 @@ public class Archer : Enemy
     public override void ShootAttack()
     {
         _archerAttack.Attack();
+    }
+    public override void Clash()
+    {
+        _archerAttack.OnTriggerEnter(_archerCollider);
     }
 
     public override void LevelUp()

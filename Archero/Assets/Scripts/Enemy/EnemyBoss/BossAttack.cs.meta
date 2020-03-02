@@ -3,7 +3,13 @@ guid: d0c94621e777d4147878f0c8d9fbb7a8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _bossAnimator: {instanceID: 0}
+  - _bossHealth: {instanceID: 0}
+  - _bossFirstShell: {fileID: 670753778371475772, guid: e1e5447ac4ce1d2449f38c66938fa57f,
+      type: 3}
+  - _bossSecondShell: {fileID: 819381500676505595, guid: e651ff737ea179040bda144f109865c8,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

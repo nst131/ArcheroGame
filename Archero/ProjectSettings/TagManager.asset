@@ -14,6 +14,7 @@ TagManager:
   - Characteristic
   - TextCoin
   - MenuCharacteristic
+  - GameOver
   layers:
   - Default
   - TransparentFX

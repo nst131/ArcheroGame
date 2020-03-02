@@ -3,6 +3,7 @@
 public class BossFirstDamage : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _particleFirstDamage;
+    [SerializeField] private GameObject _bossFireShell;
     private GameObject _firstDamage;
     private LevelUp _levelUp;
     private float _firstDamageAttack;
@@ -19,7 +20,7 @@ public class BossFirstDamage : MonoBehaviour
     {
         if(other.tag == "Ground")
         {
-            Instantiate<GameObject>(Resources.Load<GameObject>("BossShell/FireShell"),_firstDamage.transform.position,Quaternion.identity);
+            Instantiate<GameObject>(_bossFireShell,_firstDamage.transform.position,Quaternion.identity);
             Destroy(_firstDamage);
         }
     }

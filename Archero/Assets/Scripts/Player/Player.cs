@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
+public delegate void ReproductionSounds();
+
 public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
     [SerializeField] private HealthHelper _playerHealth;
     [SerializeField] private Animator _playerAnim;
     [SerializeField] private NavMeshAgent _playerNavMesh;
+    [SerializeField] private PlayerSounds _playerSounds;
+    private event ReproductionSounds _soundWalkStart;
+    private event ReproductionSounds _soundWalkStop;
+    private event ReproductionSounds _soundShoot;
 
     [Header("DescriptionMove")]
     [SerializeField] private float _speedMove = 8;
@@ -18,6 +24,24 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _mobileController = GameObject.FindGameObjectWithTag("Joystick").GetComponent<MobileController>();
+        _soundWalkStart += _playerSounds.WalkStart;
+        _soundWalkStop += _playerSounds.WalkStop;
+        _soundShoot += _playerSounds.ShootStart;
+    }
+
+    private void InvokeEventWalkStart()
+    {
+        _soundWalkStart.Invoke();
+    }
+
+    private void InvokeEventWalkStop()
+    {
+        _soundWalkStop.Invoke();
+    }
+
+    public void InvokeEventShoot()
+    {
+        _soundShoot.Invoke();
     }
 
     private void Update()
@@ -38,10 +62,12 @@ public class Player : MonoBehaviour
         {
             _playerAnim.SetBool("Move", true);
             _playerAnim.SetBool("Damage", false);
+            InvokeEventWalkStart();
         }
         else
         {
             _playerAnim.SetBool("Move", false);
+            InvokeEventWalkStop();
         }
 
         if(Vector3.Angle(Vector3.forward, _moveVector)>1f || Vector3.Angle(Vector3.forward, _moveVector)==0)

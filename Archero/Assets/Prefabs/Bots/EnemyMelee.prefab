@@ -634,8 +634,9 @@ GameObject:
   - component: {fileID: 800038101261846865}
   - component: {fileID: 800038101261846870}
   - component: {fileID: 800038101261846871}
-  - component: {fileID: 800038101261846955}
-  - component: {fileID: -4518975674724941060}
+  - component: {fileID: 856085550974209515}
+  - component: {fileID: 2075718763893086447}
+  - component: {fileID: 748128383742761263}
   m_Layer: 9
   m_Name: EnemyMelee
   m_TagString: Enemy
@@ -686,9 +687,9 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 800038101940469960}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 2
+  m_Radius: 2.5
   m_Height: 7
   m_Direction: 1
   m_Center: {x: 0, y: 4, z: 1}
@@ -708,8 +709,9 @@ MonoBehaviour:
   _meleeNavMesh: {fileID: 800038101261846871}
   _meleeAnim: {fileID: 800038101931127636}
   _meleeAttack: {fileID: 800038101261846870}
-  _meleeHealth: {fileID: 800038101261846955}
-  _meleeDrop: {fileID: -4518975674724941060}
+  _meleeHealth: {fileID: 748128383742761263}
+  _meleeCollider: {fileID: 800038101261846868}
+  _meleeDrop: {fileID: 2075718763893086447}
 --- !u!114 &800038101261846870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,13 +725,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _melee: {fileID: 800038101940469960}
-  _meleeHealth: {fileID: 800038101261846955}
+  _meleeHealth: {fileID: 748128383742761263}
   _meleeAnim: {fileID: 800038101931127636}
   _meleeNavMesh: {fileID: 800038101261846871}
   _meleeAttack: {fileID: 800038101261846865}
   _radiusAttack: 1.5
   _speedAttack: 5
   _rangeAttack: 3
+  _forceClash: 20
 --- !u!195 &800038101261846871
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -752,22 +755,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &800038101261846955
-MonoBehaviour:
+--- !u!54 &856085550974209515
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 800038101940469960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 004024fe4020eb743a8307c945549801, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _boss: {fileID: 0}
-  _drop: {fileID: -4518975674724941060}
-  _targetCapsuleCollider: {fileID: 800038101261846868}
---- !u!114 &-4518975674724941060
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &2075718763893086447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -779,6 +783,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba40500ce1f9fd429ca1d4cbacb3925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemy: {fileID: 800038101940469960}
+  _coin: {fileID: 8180718316628672552, guid: 78309841fdf362b4e923a8e3ee5eae54, type: 3}
+  _health: {fileID: 1000012970591572, guid: 7cafb89b5a0f61f479d0a748962abbbc, type: 3}
+--- !u!114 &748128383742761263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800038101940469960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004024fe4020eb743a8307c945549801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sliderInsert: {fileID: 4257467130652263594, guid: 41d6dd9a794a0a74e8aa6cba7c9ebfc0,
+    type: 3}
+  _boss: {fileID: 0}
+  _drop: {fileID: 2075718763893086447}
+  _capsuleCollider: {fileID: 800038101261846868}
 --- !u!1 &800038101940469962
 GameObject:
   m_ObjectHideFlags: 0

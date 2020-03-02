@@ -3,7 +3,13 @@ guid: 8318f0a530c689a468ce4c19c5a3b227
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _archer: {instanceID: 0}
+  - _archerHealth: {instanceID: 0}
+  - _archerAnim: {instanceID: 0}
+  - _archerLineRenderer: {instanceID: 0}
+  - _archerShell: {fileID: 7666563655285691955, guid: 1a5a0b2b734bff143a447924640c1186,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

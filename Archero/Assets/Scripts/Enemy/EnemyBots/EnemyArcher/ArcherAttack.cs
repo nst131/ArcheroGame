@@ -9,11 +9,13 @@ public class ArcherAttack : MonoBehaviour
     [SerializeField] private HealthHelper _archerHealth;
     [SerializeField] private Animator _archerAnim;
     [SerializeField] private LineRenderer _archerLineRenderer;
+    [SerializeField] private GameObject _archerShell;
 
     [Header("DescriptionAttack")]
     [SerializeField] private float _wateTimeAnimation = 1.3f;
     [SerializeField] private float _wateTimeAiming = 2f;
     [SerializeField] private float _forceShoot = 2000;
+    [SerializeField] private float _forceClash = 20;
     [HideInInspector] public bool ReloadingAttack = false;
 
     private void Start()
@@ -44,7 +46,7 @@ public class ArcherAttack : MonoBehaviour
         if (!_player || _playerHealth.Dead || !_archer ||_archerHealth.Dead)
             yield break;
 
-        GameObject arrow = Instantiate<GameObject>(Resources.Load<GameObject>("BotsShell/ArcherShell"), transform.GetChild(2).position,
+        GameObject arrow = Instantiate<GameObject>(_archerShell, transform.GetChild(2).position,
             Quaternion.identity);
         arrow.transform.rotation = Quaternion.LookRotation(arrow.transform.position - _archer.transform.position);
         arrow.transform.Rotate(55, 0, 0);
@@ -56,5 +58,13 @@ public class ArcherAttack : MonoBehaviour
 
         ReloadingAttack = false;
         _archerAnim.SetBool("Damage", false);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<HealthHelper>().TakeAwayHP(_forceClash);
+        }
     }
 }

@@ -11,6 +11,7 @@ public class Melee : Enemy
     [SerializeField] private Animator _meleeAnim;
     [SerializeField] private MeleeAttack _meleeAttack;
     [SerializeField] private HealthHelper _meleeHealth;
+    [SerializeField] private Collider _meleeCollider;
     [SerializeField] private Drop _meleeDrop;
     private Vector3 _meleeSpawn;
     private BotsData _botsData;
@@ -36,7 +37,7 @@ public class Melee : Enemy
 
     public override void Tactic()
     {
-        if (!_player)
+        if (!_player || _playerHealth.Dead)
             return;
 
         if (Vector3.Distance(_melee.transform.position, _player.transform.position) 
@@ -57,9 +58,6 @@ public class Melee : Enemy
             else
                 MoveBack(_meleeSpawn);
         }
-
-        if (_player.GetComponent<HealthHelper>().Dead)
-            _player = null;
     }
 
     private IEnumerator WaitingEndAttack()
@@ -73,6 +71,11 @@ public class Melee : Enemy
     public override void ShootAttack()
     {
         _meleeAttack.Attack();
+    }
+
+    public override void Clash()
+    {
+        _meleeAttack.OnTriggerEnter(_meleeCollider);
     }
 
     public override void LevelUp()

@@ -6,17 +6,14 @@ public class LevelUp : MonoBehaviour
     [SerializeField] private BossData _bossData;
     [SerializeField] private GameObject[] _pointsBots;
     [SerializeField] private GameObject _camera;
-    private GameObject[] _bots;
-    private GameObject _boss;
+    [SerializeField] private GameObject[] _bots;
+    [SerializeField] private GameObject _boss;
 
     private int levelPassage = 1;
     public int LevelPassage { get { return levelPassage; } }
 
     private void Start()
     {
-        _bots = Resources.LoadAll<GameObject>("Prefabs/Bots");
-        _boss = Resources.Load<GameObject>("Prefabs/Boss/EnemyBoss");
-
         RevivalBots();
     }
 

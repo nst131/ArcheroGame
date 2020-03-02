@@ -32,6 +32,7 @@ public class GetHealth : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             other.GetComponent<HealthHelper>().Hp += _health;
+            other.GetComponent<HealthHelper>().TextHp += _health;
             Destroy(_bottleHealth);
         }
     }

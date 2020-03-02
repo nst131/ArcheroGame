@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class BlackoutScreen : MonoBehaviour
 {
     [SerializeField] private GameObject _panelBlackout;
     [SerializeField] private Animator _panelBlackoutAnim;
+    [SerializeField] private GameObject _buttonBack;
     private GameObject _sliderLevel;
     private GameObject _textCoin;
     private bool _getDarkScreen;
@@ -32,6 +32,7 @@ public class BlackoutScreen : MonoBehaviour
             {
                 _sliderLevel.SetActive(false);
                 _textCoin.SetActive(false);
+                _buttonBack.SetActive(false);
                 _panelBlackoutAnim.SetTrigger("GetBlack");
                 _times = Time.time + 1;
                 _transparentScreen = false;
@@ -41,6 +42,7 @@ public class BlackoutScreen : MonoBehaviour
             {
                 _getDarkScreen = false;
                 _sliderLevel.SetActive(true);
+                _buttonBack.SetActive(true);
                 _textCoin.SetActive(true);
                 _panelBlackoutAnim.ResetTrigger("GetBlack");
                 _transparentScreen = true;

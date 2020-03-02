@@ -5,6 +5,7 @@ public class Boss : Enemy
 {
     private GameObject _boss;
     private HealthHelper _bossHealth;
+    private Collider _bossCollider;
     private BossAttack _bossAttack;
     private BossData _bossData;
     private BossRoundDamage _bossRoundDamage;
@@ -21,6 +22,7 @@ public class Boss : Enemy
     {
         _boss = GameObject.FindGameObjectWithTag("Enemy");
         _bossHealth = _boss.GetComponent<HealthHelper>();
+        _bossCollider = _boss.GetComponent<Collider>();
         _bossAttack = _boss.GetComponent<BossAttack>();
         _bossRoundDamage = FindObjectOfType<BossRoundDamage>();
         _bossHealth = _boss.GetComponent<HealthHelper>();
@@ -64,15 +66,17 @@ public class Boss : Enemy
     {
         yield return new WaitForSeconds(8);
 
-        if (!_player || _playerHealth.Dead || !_boss || _bossHealth.Dead)
-            yield break;
-
         ShootAttack();
     }
 
     public override void ShootAttack()
     {
         _bossAttack.Attack();
+    }
+
+    public override void Clash()
+    {
+        _bossAttack.OnTriggerEnter(_bossCollider);
     }
 
     public override void LevelUp()

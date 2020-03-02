@@ -17,16 +17,6 @@ public class GetCoins : MonoBehaviour
         _moveCoins += new CoinsMove(MoveCoinsToPlayer);
     }
 
-    void Update()
-    {
-        IgnoreCoins();
-    }
-
-    private void IgnoreCoins()
-    {
-        Physics.IgnoreLayerCollision(10, 10);
-    }
-
     public void InvokeEventMoveCoins()
     {
         _moveCoins.Invoke(NumberCoins(), _player.transform.position);

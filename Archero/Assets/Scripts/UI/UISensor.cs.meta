@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7d4c6e5605f2d1b48a4dcb908161da94
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _sensor: {instanceID: 0}
+  - _imageSlot: {fileID: 7218367814951742649, guid: 797318c3eb61dc843bebcff5406da9eb,
+      type: 3}
+  - _panelItems: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -11,6 +11,7 @@ public class Golem : Enemy
     [SerializeField] private GolemAttack _golemAttack;
     [SerializeField] private Animator _golemAnim;
     [SerializeField] private NavMeshAgent _golemNavMesh;
+    [SerializeField] private Collider _golemCollider;
     [SerializeField] private Drop _golemDrop;
     private BotsData _botsData;
 
@@ -62,6 +63,11 @@ public class Golem : Enemy
     public override void ShootAttack()
     {
         _golemAttack.Attack();
+    }
+
+    public override void Clash()
+    {
+        _golemAttack.OnTriggerEnter(_golemCollider);
     }
 
     public override void LevelUp()
