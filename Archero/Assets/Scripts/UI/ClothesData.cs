@@ -6,6 +6,6 @@ public class ClothesData : MonoBehaviour
     public UIClothesData CharacteristicClothes { get { return _characteristicClothes; } }
     [SerializeField] private InvertoryCell _typeClothes;
     public InvertoryCell TypeCltothes { get { return _typeClothes; } }
-    [SerializeField] private int _clothesActive = 0;
-    public int ClothesActive { get { return _clothesActive; } set { _clothesActive = value; } }
+    [SerializeField] private AllClothes _nameClothe;
+    public AllClothes NameClothe { get { return _nameClothe; } }
 }

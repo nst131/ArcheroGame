@@ -89,3 +89,4 @@ MonoBehaviour:
   _characteristicClothes: {fileID: 11400000, guid: 5b793409a19f18e419fa61d7ddafc269,
     type: 2}
   _typeClothes: 3
+  _nameClothe: 1

@@ -18,7 +18,6 @@ public class ClotheItem : MonoBehaviour
         {
             if (item.Value == typeClothes)
             {
-                myitem.ClothesActive = 1;
                 myitem.gameObject.transform.SetParent(item.Key.transform);
                 myitem.gameObject.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
             }

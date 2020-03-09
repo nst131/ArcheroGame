@@ -39,9 +39,13 @@ public class CharacterStats : MonoBehaviour
     private static float _health;
     private static float _speed;
 
-    private void Start()
+    private void Awake()
     {
         IntilizationDict();
+    }
+
+    private void Start()
+    {
         IntilizationStats();
     }
 
@@ -56,7 +60,7 @@ public class CharacterStats : MonoBehaviour
 
     public void IntilizationStats()
     {
-        CheckClothes();
+        CollectionPoints();
 
         _textPlayerDamage.text = _playerDamage.ToString() + "+" + _damage.ToString();
         _textPlayerHealth.text = _playerHealth.ToString() + "+" + _health.ToString();
@@ -71,7 +75,7 @@ public class CharacterStats : MonoBehaviour
         _textCurrentSpeed.text = PlayerCurrentSpeed.ToString();
     }
 
-    private void CheckClothes()
+    private void CollectionPoints()
     {
         _damage = 0;
         _health = 0;
@@ -86,7 +90,7 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    public void ChoiseClothes(GameObject backgroundClothes)
+    public void WatchClothes(GameObject backgroundClothes)
     {
         ClothesData clothes = backgroundClothes.GetComponentInChildren<ClothesData>();
         if (!clothes)
@@ -110,10 +114,35 @@ public class CharacterStats : MonoBehaviour
         _currentSlot = backgroundClothes;
     }
 
-    public void CloseChoiseClothes()
+    public void CloseWatchClothes()
     {
         _buttonDress.SetActive(false);
         _buttonClothe.SetActive(false);
         _panelShowClothes.SetActive(false);
+    }
+
+    public void DeleteClothes()
+    {
+        switch (_currentClothes.GetComponent<ClothesData>().NameClothe)
+        {
+            case AllClothes.Armor : AmountClothesHasPlayer.Armor -= 1;
+                break;
+            case AllClothes.Arrow : AmountClothesHasPlayer.Arrow -= 1;
+                break;
+            case AllClothes.Boots : AmountClothesHasPlayer.Boots -= 1;
+                break;
+            case AllClothes.Bow   : AmountClothesHasPlayer.Bow -= 1;
+                break;
+            case AllClothes.Pants : AmountClothesHasPlayer.Pants -= 1;
+                break;
+            case AllClothes.Helm : AmountClothesHasPlayer.Helm -= 1;
+                break;
+                
+        }
+
+        Destroy(_currentClothes);
+
+        CloseWatchClothes();
+        Invoke("IntilizationStats", 0.1f);
     }
 }

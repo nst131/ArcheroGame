@@ -19,16 +19,16 @@ public class UISensor : MonoBehaviour
     {
         CheckCell();
     }
-
+    
     private void CheckCell()
     {
         Ray ray = new Ray(_sensor.transform.position, Vector3.up);
         RaycastHit hit;
-
+    
         if(Physics.Raycast(ray,out hit,_distance))
         {
             _insertCell = false;
-
+    
             if(!_insertCell && hit.collider.gameObject.transform.childCount == 1)
             {
                 InsertCell();
@@ -39,10 +39,10 @@ public class UISensor : MonoBehaviour
         {
             _insertCell = true;
         }
-
+    
         if (!_insertCell)
             return;
-
+    
         InsertCell();
     }
 
@@ -59,7 +59,6 @@ public class UISensor : MonoBehaviour
         {
             if (_allCell[i].transform.childCount == 0)
             {
-                _characterStats.CurrentClothes.GetComponent<ClothesData>().ClothesActive = 0;
                 _characterStats.CurrentClothes.transform.SetParent(_allCell[i].transform);
                 _characterStats.CurrentClothes.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
                 _panelCharacteristics.SetActive(false);

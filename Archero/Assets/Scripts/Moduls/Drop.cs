@@ -7,24 +7,22 @@ public class Drop : MonoBehaviour
     [SerializeField] private GameObject _enemy;
     [SerializeField] private GameObject _coin;
     [SerializeField] private GameObject _health;
+    [SerializeField] private GameObject _box;
+    [SerializeField] private BossAttack _boss;
     private event Scatter _scatterHealth;
     private event Scatter _scatterCoins;
+    private event Scatter _scatterBox;
 
     private void Start()
     {
         _scatterHealth += ScatterHealth;
         _scatterCoins += ScatterCoins;
-    }
-
-    private void InsertBottleHealth()
-    {
-        Vector3 enemyPosHeight = new Vector3(_enemy.transform.position.x, _enemy.transform.position.y + 2, _enemy.transform.position.z);
-        Instantiate<GameObject>(_health, enemyPosHeight, Quaternion.identity);
+        _scatterBox += ScatterBox;
     }
 
     private bool ChanceOfFalling()
     {
-        if(GetComponent<BossAttack>())
+        if(_boss != null)
         {
             if (Random.Range(0, 10) <= 10)
                 return true;
@@ -38,11 +36,44 @@ public class Drop : MonoBehaviour
         return false;
     }
 
+    private bool ChanceofFallingBox()
+    {
+        if(_boss != null)
+        {
+            if (Random.Range(0, 10) <= 10) 
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void ScatterHealth()
     {
         if(ChanceOfFalling())
         {
-            InsertBottleHealth();
+            InsertThings(_health);
+        }
+    }
+
+    private void ScatterBox()
+    {
+        if(ChanceofFallingBox())
+        {
+            InsertThings(_box);
+        }
+    }
+
+    private void InsertThings(GameObject thing)
+    {
+        Vector3 enemyPosHeight = new Vector3(_enemy.transform.position.x, _enemy.transform.position.y + 2, _enemy.transform.position.z);
+        if(thing == _health)
+        {
+            Instantiate<GameObject>(thing, enemyPosHeight, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate<GameObject>(thing, enemyPosHeight + Random.insideUnitSphere , Quaternion.identity);
         }
     }
 
@@ -63,5 +94,10 @@ public class Drop : MonoBehaviour
     public void InvokeEventScatterCoins()
     {
         _scatterCoins.Invoke();
+    }
+
+    public void InvokeEventScatterbox()
+    {
+        _scatterBox.Invoke();
     }
 }

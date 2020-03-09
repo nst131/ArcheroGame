@@ -5,9 +5,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class SaveLoadManager : MonoBehaviour
 {
-    [SerializeField]private UILevelUp _uiLevelUP;
+    [SerializeField] private UILevelUp _uiLevelUP;
     private event Action _game;
     private string _filePath;
+    private bool loadScene;
+    public bool LoadScene { get { return loadScene; } set { loadScene = value; } }
 
     private void Start()
     {
@@ -25,25 +27,27 @@ public class SaveLoadManager : MonoBehaviour
     {
         BinaryFormatter binary = new BinaryFormatter();
         FileStream stream = new FileStream(_filePath, FileMode.Create);
-
+    
         Save save = new Save();
         save.Score = _uiLevelUP.CurrentCoinGold;
-
+        save.LoadScene = loadScene;
+    
         binary.Serialize(stream, save);
         stream.Close();
     }
-
+    
     public void LoadGame()
     {
         if (!File.Exists(_filePath))
             return;
-
+    
         BinaryFormatter binary = new BinaryFormatter();
         FileStream stream = new FileStream(_filePath, FileMode.Open);
-
-        Save save = binary.Deserialize(stream) as Save;
+    
+        Save load = binary.Deserialize(stream) as Save;
         stream.Close();
-        UIInventory.WinScore = save.Score;
+        UIInventory.WinScore = load.Score;
+        UISaveLoadInventory.LoadScene = load.LoadScene;
     }
 }
 
@@ -51,5 +55,6 @@ public class SaveLoadManager : MonoBehaviour
 public class Save
 {
     public int Score;
+    public bool LoadScene;
 }
 

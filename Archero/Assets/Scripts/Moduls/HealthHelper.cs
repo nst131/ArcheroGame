@@ -111,6 +111,7 @@ public class HealthHelper : MonoBehaviour
                 Destroy(gameObject, 3);
                 _drop.InvokeEventScatterCoins();
                 _drop.InvokeEventScatterHealth();
+                _drop.InvokeEventScatterbox();
             }
             else
             {

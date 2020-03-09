@@ -29,6 +29,7 @@ public class Gate : MonoBehaviour
             GateOpen = true;
             _gateAnim.SetBool("Open", true);
             _getCoins.InvokeEventMoveCoins();
+            _getCoins.InvokeEventMoveBox();
         }
         else
         {

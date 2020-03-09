@@ -15,6 +15,7 @@ TagManager:
   - TextCoin
   - MenuCharacteristic
   - GameOver
+  - Box
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Player
   - Enemy
   - Coin
-  - 
+  - Box
   - 
   - 
   - 
