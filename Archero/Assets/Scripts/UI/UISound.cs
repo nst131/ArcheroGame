@@ -3,11 +3,11 @@
 public class UISound : MonoBehaviour
 {
     [SerializeField] private AudioClip[] _audiosBackground;
-    [SerializeField] private AudioSource _audioSource;
-
-    private float _maxVolume = 1.0f;
-
+    [SerializeField] private AudioSource _audioSourceMusic;
+    public AudioSource AudioSourceMusic { get { return _audioSourceMusic; } set { _audioSourceMusic = value; } }
+   
     private static UISound _instance;
+
     public static UISound Instance
     {
         get
@@ -22,7 +22,7 @@ public class UISound : MonoBehaviour
         set { _instance = value; }
     }
 
-    private void Awake()
+    private void Start()
     {
         IntilizationInstance();
     }
@@ -44,16 +44,11 @@ public class UISound : MonoBehaviour
     public void SetAudio()
     {
         AudioClip audio = _audiosBackground[Random.Range(0, _audiosBackground.Length)];
-        _audioSource.PlayOneShot(audio);
+        _audioSourceMusic.PlayOneShot(audio);
     }
 
     public void StopAudio()
     {
-        _audioSource.Stop();
-    }
-
-    public void SetMaxVolume(float Volume)
-    {
-        _audioSource.volume = _maxVolume * Volume;
+        _audioSourceMusic.Stop();
     }
 }

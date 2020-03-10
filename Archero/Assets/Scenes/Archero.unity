@@ -1527,7 +1527,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.91e-43, y: -9.037371e-10, z: 6.91e-43, w: -9.231327e-10}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -4097,6 +4097,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2704105729247175620, guid: e1700948fde1c1643b633834e4432b0a,
+        type: 3}
+      propertyPath: _audioSourcePlayer.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704105729247175620, guid: e1700948fde1c1643b633834e4432b0a,
+        type: 3}
+      propertyPath: _audioSourceLevelUp
+      value: 
+      objectReference: {fileID: 636479244}
+    - target: {fileID: 2704105729247175620, guid: e1700948fde1c1643b633834e4432b0a,
+        type: 3}
+      propertyPath: _audioSourceGameOver
+      value: 
+      objectReference: {fileID: 905677896}
+    - target: {fileID: 2704105729247175620, guid: e1700948fde1c1643b633834e4432b0a,
+        type: 3}
+      propertyPath: _audioSourcePlayer.Array.data[0]
+      value: 
+      objectReference: {fileID: 6827825938258697791}
+    - target: {fileID: 2704105729247175620, guid: e1700948fde1c1643b633834e4432b0a,
+        type: 3}
+      propertyPath: _audioSourcePlayer.Array.data[1]
+      value: 
+      objectReference: {fileID: 6827825938258697790}
+    - target: {fileID: 2704105729247175620, guid: e1700948fde1c1643b633834e4432b0a,
+        type: 3}
+      propertyPath: _audioSourcePlayer.Array.data[2]
+      value: 
+      objectReference: {fileID: 636479244}
+    - target: {fileID: 2704105729247175620, guid: e1700948fde1c1643b633834e4432b0a,
+        type: 3}
+      propertyPath: _audioSourcePlayer.Array.data[3]
+      value: 
+      objectReference: {fileID: 905677896}
     - target: {fileID: 3294143446273688869, guid: e1700948fde1c1643b633834e4432b0a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4157,8 +4192,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerArcher
       objectReference: {fileID: 0}
+    - target: {fileID: 7641699748927924693, guid: e1700948fde1c1643b633834e4432b0a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1700948fde1c1643b633834e4432b0a, type: 3}
+--- !u!82 &6827825938258697790 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6827825936612612623, guid: e1700948fde1c1643b633834e4432b0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6827825938258697789}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6827825938258697791 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7641699748927924693, guid: e1700948fde1c1643b633834e4432b0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6827825938258697789}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7535490527703413664 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4684831092644315287, guid: 05648f1f52f5a64428eae0bd5aad9271,

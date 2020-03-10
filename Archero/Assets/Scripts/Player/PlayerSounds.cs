@@ -3,17 +3,21 @@
 public class PlayerSounds : MonoBehaviour
 {
     [SerializeField] private AudioClip[] _audioSoundsPlayer;
-    [SerializeField] private AudioSource _audioSourceWalk;
-    [SerializeField] private AudioSource _audioSourceShoot;
-    private AudioSource _audioSourceLevelUp;
-    private AudioSource _audioSourceGameOver;
-
+    [SerializeField] private AudioSource[] _audioSourcePlayer;
+    public static float MaxSoundVolume = 1;
     private bool _audioSourceWalkPlay = false;
 
     private void Start()
     {
-        _audioSourceLevelUp = GameObject.FindGameObjectWithTag("SliderLevel").GetComponent<AudioSource>();
-        _audioSourceGameOver = GameObject.Find("Canvas").GetComponent<AudioSource>();
+        SetSoundsVolume();
+    }
+
+    private void SetSoundsVolume()
+    {
+        for (int i = 0; i < _audioSourcePlayer.Length; i++)
+        {
+            _audioSourcePlayer[i].volume = MaxSoundVolume;
+        }
     }
 
     public void WalkStart()
@@ -22,34 +26,34 @@ public class PlayerSounds : MonoBehaviour
             return;
 
         AudioClip audio = _audioSoundsPlayer[(int)Sounds.Walk];
-        _audioSourceWalk.PlayOneShot(audio);
+        _audioSourcePlayer[(int)Sounds.Walk].PlayOneShot(audio);
         _audioSourceWalkPlay = true;
     }
 
     public void WalkStop()
     {
-        if (!_audioSourceWalk)
+        if (!_audioSourcePlayer[(int)Sounds.Walk])
             return;
 
-        _audioSourceWalk.Stop();
+        _audioSourcePlayer[(int)Sounds.Walk].Stop();
         _audioSourceWalkPlay = false;
     }
 
     public void ShootStart()
     {
         AudioClip audio = _audioSoundsPlayer[(int)Sounds.Shoot];
-        _audioSourceShoot.PlayOneShot(audio);
+        _audioSourcePlayer[(int)Sounds.Shoot].PlayOneShot(audio);
     }
 
     public void LevelUp()
     {
         AudioClip audio = _audioSoundsPlayer[(int)Sounds.LevelUp];
-        _audioSourceLevelUp.PlayOneShot(audio);
+        _audioSourcePlayer[(int)Sounds.LevelUp].PlayOneShot(audio);
     }
     
     public void GameOver()
     {
         AudioClip audio = _audioSoundsPlayer[(int)Sounds.GameOver];
-        _audioSourceGameOver.PlayOneShot(audio);
+        _audioSourcePlayer[(int)Sounds.GameOver].PlayOneShot(audio);
     }
 }

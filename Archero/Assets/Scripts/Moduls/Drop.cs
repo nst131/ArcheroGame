@@ -40,7 +40,7 @@ public class Drop : MonoBehaviour
     {
         if(_boss != null)
         {
-            if (Random.Range(0, 10) <= 10) 
+            if (Random.Range(0, 10) <= 8) 
             {
                 return true;
             }

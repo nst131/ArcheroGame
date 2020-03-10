@@ -16,6 +16,8 @@ TagManager:
   - MenuCharacteristic
   - GameOver
   - Box
+  - SliderMusic
+  - SliderSound
   layers:
   - Default
   - TransparentFX
